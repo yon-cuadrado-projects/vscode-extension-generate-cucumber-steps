@@ -1,70 +1,37 @@
 # generate-cucumber-steps README
 
-This is the README for your extension "generate-cucumber-steps". After writing up a brief description, we recommend including the following sections.
+This extension allows to generate automatically the step definitions of the gherkin steps of a feature and copy them to the clipboard. 
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+It provides an easy way to generate the step definition functions of a gherkin feature.
 
-For example if there is an image subfolder under your extension project workspace:
+## How it works
 
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
-
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+To generate the step definition functions is only necessary to select the lines of the feature for which you want to generate them
+and press the keyboard shortcut: Ctrl + Shift + c. Once the functions are generated they are copied to the clipboard.
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+* `generate-cucumber-steps.stepFunctionType`: it defines the format of the step functions that are going to be created:
+    * - arrow function
+    * - function expression
 
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
+### 0.0.1
 
-### 1.0.0
+Initial release of generate-cucumber-steps
 
-Initial release of ...
+### 0.0.2
 
-### 1.0.1
+Fixed error in command
 
-Fixed issue #.
+### 0.0.3
 
-### 1.1.0
+Added missing arrow
 
-Added features X, Y, and Z.
+### 0.0.4
 
------------------------------------------------------------------------------------------------------------
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+Removed duplicated results
