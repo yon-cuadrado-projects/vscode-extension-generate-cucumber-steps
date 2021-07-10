@@ -35,3 +35,7 @@ Added missing arrow
 ### 0.0.4
 
 Removed duplicated results
+
+### 0.0.5
+
+Fixed a problem with empty parameters

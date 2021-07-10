@@ -59,7 +59,7 @@ When(/^The user types '(.*)' in the searchTextbox of the '(.*)'$/, ( param0: str
 
 	test( 'the extension can create a function for a valid then step', async () => {
 		// Given
-		const stepText = "Then The application displays the title 'SEARCH BLOUSE' in the search results";
+		const stepText = "Then The application displays the title '' in the search results";
 
 		await sinon.stub( generateCucumberFunctions, 'getLineKeyword' ).resolves( Promise.resolve( 'Then' ) );
 		await sinon.stub( generateCucumberFunctions, 'getSelectedTextRows' ).resolves( Promise.resolve( [stepText] ) );
@@ -125,9 +125,32 @@ When('The user clicks on the { string } button', function( param0: string ) {
 		assert.deepStrictEqual( clipboardContent, expectedClipboardContent );
 		sinon.restore();
 	} );
+	test( 'the extension detects empty parameters', async () => {
+		// Given
+		const stepText = ["Given The user navigates to the page ''"];
+
+		await sinon.stub( generateCucumberFunctions, 'getLineKeyword' ).resolves( Promise.resolve( 'Given' ) );
+		await sinon.stub( generateCucumberFunctions, 'getSelectedTextRows' ).resolves( Promise.resolve( stepText ) );
+		const workbenchConfig = vscode.workspace.getConfiguration( 'generate-cucumber-steps' );
+
+		await workbenchConfig.update( 'stepFunctionType', 'arrow function', ConfigurationTarget.Global );
+
+		// When
+		await generateCucumberFunctions.generateCucumberStepDefinitions();
+
+		// Then
+		const clipboardContent = await clipboard.readText();
+		const expectedClipboardContent = `
+Given(/^The user navigates to the page '(.*)'$/, ( param0: string ) =>{
+		return 'pending';
+} );
+`;
+		assert.deepStrictEqual( clipboardContent, expectedClipboardContent );
+		sinon.restore();
+	} );
 	test( 'the extension does not create repeated steps', async () => {
 		// Given
-		const stepText = [ "Given The user navigates to the page 'CheckboxesPage'", "Given The user navigates to the page 'CheckboxesPage'"];
+		const stepText = ["Given The user navigates to the page 'CheckboxesPage'", "Given The user navigates to the page 'CheckboxesPage'"];
 
 		await sinon.stub( generateCucumberFunctions, 'getLineKeyword' ).resolves( Promise.resolve( 'Given' ) );
 		await sinon.stub( generateCucumberFunctions, 'getSelectedTextRows' ).resolves( Promise.resolve( stepText ) );

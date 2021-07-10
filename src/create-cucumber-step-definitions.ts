@@ -25,7 +25,7 @@ export default class GenerateCucumberStepDefinitions {
     };
 
     getParameters = ( lineText: string ): string[] | null => {
-        return lineText.match( /(?<!^)'.+?'/gu );
+        return lineText.match( /(?<!^)'.+?'|''/gu );
     };
 
     getLineKeyword = ( lineText: string ): string => {
@@ -64,7 +64,7 @@ export default class GenerateCucumberStepDefinitions {
             const scenarioLineTextWithoutKeyword = this.getParsedRowText( lineText );
             const lineKeyword = await this.getLineKeyword( lineText );
             const functionValue = this.generateStepFunction( scenarioLineTextWithoutKeyword, functionType!, lineKeyword );
-            if ( scenarioLineTextWithoutKeyword && !stepFunctions.includes(functionValue) ) {
+            if ( scenarioLineTextWithoutKeyword && !stepFunctions.includes( functionValue ) ) {
                 stepFunctions = `${stepFunctions}\n${functionValue}`;
             }
         };
